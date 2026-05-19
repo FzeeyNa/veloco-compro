@@ -48,7 +48,7 @@ export default function Contact() {
             <div className="flex flex-wrap gap-4">
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/6281234567890?text=Halo%20Veloco%2C%20saya%20tertarik%20dengan%20layanan%20Anda"
+                href="https://wa.me/6285781228271?text=Halo%20Veloco%2C%20saya%20tertarik%20dengan%20layanan%20Anda"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
@@ -61,7 +61,7 @@ export default function Contact() {
 
               {/* Email CTA */}
               <a
-                href="mailto:hello@veloco.id"
+                href="mailto:velocoproject@gmail.com"
                 className="btn-secondary"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

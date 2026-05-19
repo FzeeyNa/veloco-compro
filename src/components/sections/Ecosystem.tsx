@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -36,11 +37,20 @@ const programs = [
 
 export default function Ecosystem() {
   const ref = useScrollReveal();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const { current } = scrollContainerRef;
+      const scrollAmount = current.clientWidth * 0.8; // scroll by 80% of container width
+      current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="ecosystem" className="section-padding bg-off-white">
       <div className="container-custom px-4 md:px-8" ref={ref}>
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <span className="badge mb-4 reveal-item">Our Ecosystem</span>
           <h2
             className="text-3xl md:text-5xl font-normal leading-tight reveal-item"
@@ -52,14 +62,40 @@ export default function Ecosystem() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Mobile scroll buttons */}
+        <div className="flex justify-end gap-2 mb-4 sm:hidden reveal-item pr-2">
+          <button 
+            onClick={() => scroll("left")}
+            className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-dark hover:bg-gray-50 hover:text-primary transition-colors shadow-sm"
+            aria-label="Scroll left"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button 
+            onClick={() => scroll("right")}
+            className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-dark hover:bg-gray-50 hover:text-primary transition-colors shadow-sm"
+            aria-label="Scroll right"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+
+        <div 
+          ref={scrollContainerRef}
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
+        >
           {programs.map((program, i) => (
-            <div key={i} className="card text-center group reveal-item">
-              <div className="w-20 h-20 mx-auto mb-4 relative">
+            <div key={i} className="card text-center group reveal-item min-w-65 w-[75vw] sm:min-w-0 sm:w-auto shrink-0 snap-center">
+              <div className="w-24 h-16 sm:w-32 sm:h-24 mx-auto mb-4 relative">
                 <Image
                   src={program.logo}
                   alt={program.name}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-contain"
                 />
               </div>

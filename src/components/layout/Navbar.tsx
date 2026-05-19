@@ -42,11 +42,11 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo/5.png"
+                src="/logo/logo-removebg.png"
                 alt="Veloco."
-                width={120}
-                height={40}
-                className="h-8 md:h-10 w-auto"
+                width={250}
+                height={80}
+                className="h-16 md:h-24 w-auto object-contain scale-[1.75] origin-left"
                 priority
               />
             </Link>

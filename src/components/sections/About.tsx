@@ -48,25 +48,25 @@ export default function About() {
               hingga konsultasi IT strategis.
             </p>
 
-            <div className="flex gap-12">
+            <div className="flex gap-12 mt-4">
               <div>
                 <p
                   className="text-4xl font-bold text-primary"
                   style={{ fontFamily: "var(--font-dm-serif)" }}
                 >
-                  10+
+                  4+
                 </p>
-                <p className="text-sm text-mid-gray mt-1">Team Members</p>
+                <p className="text-sm text-mid-gray mt-1 font-medium">Program & Divisi</p>
               </div>
               <div>
                 <p
                   className="text-4xl font-bold text-primary"
                   style={{ fontFamily: "var(--font-dm-serif)" }}
                 >
-                  98%
+                  ∞
                 </p>
-                <p className="text-sm text-mid-gray mt-1">
-                  Client Satisfaction
+                <p className="text-sm text-mid-gray mt-1 font-medium">
+                  Ide & Inovasi
                 </p>
               </div>
             </div>
