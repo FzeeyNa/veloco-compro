@@ -2,7 +2,16 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  color: string;
+  isPlaceholder?: boolean;
+  link?: string;
+};
+
+const projects: Project[] = [
   {
     title: "Veloco x Thoth",
     category: "IT Solutions",
@@ -14,6 +23,7 @@ const projects = [
     category: "UMKM Application",
     description: "Aplikasi mobile untuk membantu kelayakan bisnis UMKM.",
     color: "from-[#1a1a2e] to-[#16213e]",
+    link: "https://yayasanlayak.or.id/",
   },
   {
     title: "More Projects",
@@ -58,51 +68,73 @@ export default function Portfolio() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <div
-              key={i}
-              className="group cursor-pointer reveal-item"
-            >
-              {/* Image placeholder */}
-              <div
-                className={`rounded-2xl aspect-[4/3] bg-gradient-to-br ${project.color} mb-4 overflow-hidden relative`}
-              >
-                {project.isPlaceholder ? (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-dark/40 text-lg font-medium">
-                      Coming Soon
-                    </span>
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span
-                      className="text-white/20 text-4xl font-bold"
-                      style={{ fontFamily: "var(--font-dm-serif)" }}
-                    >
-                      {project.title}
-                    </span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-              </div>
+          {projects.map((project, i) => {
+            const innerContent = (
+              <>
+                {/* Image placeholder */}
+                <div
+                  className={`rounded-2xl aspect-[4/3] bg-gradient-to-br ${project.color} mb-4 overflow-hidden relative`}
+                >
+                  {project.isPlaceholder ? (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-dark/40 text-lg font-medium">
+                        Coming Soon
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+                      <span
+                        className="text-white/20 text-4xl font-bold"
+                        style={{ fontFamily: "var(--font-dm-serif)" }}
+                      >
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                </div>
 
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-lg font-semibold">{project.title}</h3>
-                {!project.isPlaceholder && (
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    className="text-mid-gray group-hover:text-primary transition-colors"
-                  >
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-lg font-semibold">{project.title}</h3>
+                  {!project.isPlaceholder && (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className="text-mid-gray group-hover:text-primary transition-colors"
+                    >
+                      <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </div>
+                <p className="text-sm text-mid-gray">{project.category}</p>
+              </>
+            );
+
+            if (project.link) {
+              return (
+                <a
+                  key={i}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group cursor-pointer reveal-item block"
+                >
+                  {innerContent}
+                </a>
+              );
+            }
+
+            return (
+              <div
+                key={i}
+                className="group cursor-pointer reveal-item"
+              >
+                {innerContent}
               </div>
-              <p className="text-sm text-mid-gray">{project.category}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
